@@ -1,0 +1,24 @@
+.admin_feed {
+  min-height: 100%;
+}
+
+i {
+  padding:5px;
+  color:#a569fa;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  width: 100%;
+}
+td {
+  width: 45%;
+}
+
+.admin_cell{
+  border: 1px solid #c8c1c1;
+  padding-top: 10px;
+}

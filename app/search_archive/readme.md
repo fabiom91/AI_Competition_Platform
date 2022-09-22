@@ -1,0 +1,1 @@
+This folder will contain an 'archive.csv' file that is used to populate the searchbar in the dashboard page of this application

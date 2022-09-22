@@ -1,0 +1,46 @@
+#profile_picture {
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(113, 86, 150, 0.54);
+  border-radius: 100%;
+  clip-path: circle(150px at center);
+}
+
+.name_title p{
+  margin:0;
+}
+
+#my_beautiful_phrase {
+  text-align: center;
+  font-style: italic;
+  font-size: 80%;
+  margin-top: 15px;
+}
+
+.max200 {
+  max-width: 400px;
+}
+
+
+
+.small-card:hover {
+  box-shadow: 50px 1px 50px grey;
+}
+
+canvas {
+  margin-top: 30px;
+  height: 80%;
+}
+.comp_progress p {
+  padding: 20px;
+}
+
+
+#abort_update_btn {
+  display: none;
+}
+
+#update_picture_button {
+  margin: 10px 0;
+  display: none;
+}

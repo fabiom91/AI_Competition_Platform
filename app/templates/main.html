@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" href="../static/imgs/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/c346c28ff4.js" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+
+    <script src="../static/js/myFirebase.js" type="module" charset="utf-8"></script>
+
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+    <!-- Autocomplete search Bar -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <title>XXX Research Community</title>
+  </head>
+
+  <body>
+
+    <div class="preloader-wrapper">
+      <div class="preloader">
+          <img src="static/imgs/91.gif" alt="preloader">
+      </div>
+    </div>
+
+    <div class="row" id='bad_request_message'>
+    <!-- {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+          <p>{{ message }}</p>
+          {% endfor %}
+      {% endif %}
+    {% endwith %} -->
+    </div>
+
+
+    <div class="topnav">
+      <div class="row">
+        <div class="col" style="display: flex; flex-direction: column; max-width: fit-content;">
+          <div id="research_community">
+            <h6 style="font-size:150%">AI Competition Platform</h6>
+          </div>
+          <span style="justify-content: flex-end;flex-direction: row;display: flex;color: #502a70;">
+            By <img src="../static/imgs/mobile-logo.jpg" alt="XXX_logo" style="margin-left: 5px;">
+          </span>
+        </div>
+        <div class="col"></div>
+        <div class="col-xs" id='topnav_buttons'>
+          <a href="#" onclick="load_feed('about')" id='about_button1'>About</a>
+          <a href="#" onclick="load_feed('dashboard')" id='dashboard_button1'>Dashboard</a>
+          <a id="XXX_website" href="https://www.XXXcentre.ie" target="_blank">XXX Website</a>
+          <!-- <a class="admin_page_btn hidden" href='#' onclick="load_feed('admin')">Admin</a> -->
+        </div>
+        <div class="col login_register">
+          <div class="col">
+            <ul id='log_reg_list'>
+              <li><button type="button" class="btn btn-primary" id="login_button">Sign in</button></li>
+              <li><button type="button" class="btn btn-secondary" id="register_button">Register</button></li>
+            </ul>
+          </div>
+          <div class="col">
+            <a href="#" class="nomargin" id='noAvatar' onclick=""><img src="../static/imgs/noAvatar.png" alt="noAvatar"></a>
+          </div>
+        </div>
+        <div class="col" style='position:absolute;'>
+          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class='second_nav' id="my_second_nav">
+      <ul id='secondnav_buttons'>
+        <li><a href="#" onclick="load_feed('about')" id='about_button'>About</a></li>
+        <li><a href="#" onclick="load_feed('dashboard')" id="dashboard_button">Dashboard</a></li>
+        <li><a id="XXX_website" href="https://www.XXXcentre.ie" target="_blank">XXX Website</a></li>
+        <!-- <li><a class="admin_page_btn hidden" href='#' onclick="load_feed('admin')">Admin</a></li> -->
+      </ul>
+    </div>
+
+    <div class="progress">
+      <div id='loading_bar' class="progress-bar" role="progressbar" style="width:100%;height:5px;background-color:#d3adf9;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <div id="search_bar">
+      <div class="row">
+        <div class="col-md-11">
+          <ul>
+            <li id='search_input'>
+              <!-- <div class="ui-widget">
+                <input id="tags" placeholder="search users, articles or competitions" value="">
+              </div> -->
+
+              <!-- <img id="project-icon" src="images/transparent_1x1.png" class="ui-state-default" alt=""> -->
+              <input id="project" placeholder="search users, articles or competitions" value="">
+              <input type="hidden" id="project-id">
+              <!-- <p id="project-description"></p> -->
+
+              <!-- <input type="text" placeholder="search users, articles or competitions" value=""> -->
+            </li>
+            <!-- <li><i class="fas fa-search secondnav_button"></i></li> -->
+            <li id='create_article_btn' onclick="load_feed('create_article')"><i class="fas fa-plus secondnav_button" title="Write Article or Competition"></i></li>
+          </ul>
+          <div id='user_articles_toggle' class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="show_articles_btn" autocomplete="off" checked onclick=""> Articles
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="show_users_btn" autocomplete="off" onclick=""> Users
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feed" id='feeds_div'>
+      <iframe scroling='no' src="dashboard.html" id='feeds_frame'>
+        <p>Your browser does not support iframes.</p>
+      </iframe>
+    </div>
+
+
+    <!-- Modal SIGN IN -->
+    <div class="modal fade" id="login_register_modal" tabindex="-1" role="dialog" aria-labelledby="log_reg" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal_title">Welcome Back</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col">
+              <div id="log_browser_disclaimer"></div>
+              <p id='log_reg_description'>Use your Research Community credentials to sign in</p>
+              <p id="log_reg_disclaimer" style="color:red"></p>
+              <div class='container' id='firebaseui-auth-container'></div>
+              <!-- <a href="" class="btn btn-block btn-google" id='social1'> </a>
+              <a href="" class="btn btn-block btn-github" id='social2'> </a> -->
+              <div class="row centered">
+              </div>
+              <div class="row centered" style='color:#c9c4c3;'>
+                <div class="col"></div>
+                <div class="col-md-2 horiz_line"></div>
+                <div class="col-md-2">
+                  <p>or</p>
+                </div>
+                <div class="col-md-2 horiz_line"></div>
+                <div class="col"></div>
+              </div>
+            </div>
+            <ul>
+              <li><input onfocus="clearContents(this);" type="email" placeholder="email address" value="" id='email_textbox'></li>
+              <li><input onfocus="clearContents(this);" type="password" placeholder="password" value="" id='password_textbox'></li>
+              <li id='forgot_btn'><a href='javascript: recover_password()'>Forgot Password</a></li>
+            </ul>
+          <div class="modal-footer" id='modal_footer'>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/js/main.js" charset="utf-8"></script>
+
+
+
+  </body>
+</html>

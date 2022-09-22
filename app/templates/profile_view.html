@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/profile.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/c346c28ff4.js" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+
+
+  </head>
+
+  <body style="overflow:hidden;">
+
+    <div class="preloader-wrapper">
+      <div class="preloader">
+          <img src="static/imgs/91.gif" alt="preloader">
+      </div>
+    </div>
+
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <p><strong>Invalid Input</strong> You should check in on some of those fields below.</p>
+      <ul style='list-style:circle' id='update_error_alert'>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+
+
+    <div class="row centered">
+      <div class="col-md-2">
+        <div class="col"></div>
+          <img src="../static/imgs/noAvatar.png" alt="profile_picture" id='profile_picture'>
+          <input type='file' href='#' id='update_picture_button' accept="image/png, image/jpeg"/>
+        <div id='my_phrase'>
+          <p id='my_beautiful_phrase'></p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col name_title">
+            <div class="col">
+              <div class="col" id='name'>
+                <h5 id='name_inside'></h5>
+              </div>
+              <div class="col" id='surname'>
+                <h5 id='surname_inside'></h5>
+              </div>
+            </div>
+            <div id='qualifications_box'>
+              <p id='qualifications'></p>
+            </div>
+            <div class="row centered">
+              <div class="col">
+                <h4>Badge:</h4>
+                <div id='badge_box'>
+                  <h3 id='Badge'></h3>
+                </div>
+              </div>
+              <div class="col">
+                <h4>Reputation:</h4>
+                <div id='reputation_box'>
+                  <h3 id='reputation'></h3>
+                </div>
+              </div>
+            </div>
+            <div class="row centered">
+              <div class="col" id='public_email'>
+                <h4 id='email_field'></h4>
+              </div>
+              <div class="col" id='phone'>
+                <h4 id ='phone_field'></h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="col" align='center'>
+              <div class="container" id='admin_profile_btns'>
+
+              </div>
+              <button type="button" class="btn btn-secondary" style='margin:20px;width:100%;min-width: 200px;' id='update_profile_btn' onclick="update_profile()">Update Profile</button>
+              <button type="button" class="btn btn-secondary" style='margin:0 20px 20px 20px;width:100%;min-width: 200px;' id='abort_update_btn' onclick="reload()">Cancel</button>
+            </div>
+
+            <div class="row">
+              <div class="col max200">
+                <p><strong>Articles</strong></p>
+                <p id='articles_number'>0</p>
+              </div>
+              <div class="col max200">
+                <p><strong>Competitions</strong></p>
+                <p id='competitions_number'>0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="horiz_line"></div>
+
+    <div class="row centered nomargin">
+      <div class="col">
+        <h4>Articles Written</h4>
+      </div>
+    </div>
+    <div class="row centered" id='articles_written_feed'>
+
+    </div>
+
+
+    <div class="horiz_line"></div>
+
+    <div class="row centered nomargin">
+      <div class="col">
+        <h4>Articles Saved</h4>
+      </div>
+    </div>
+    <div class="row centered" id='articles_saved_feed'>
+
+    </div>
+
+    <div class="horiz_line"></div>
+
+    <div class="row centered nomargin">
+      <div class="col">
+        <h4>Competitions Joined</h4>
+      </div>
+    </div>
+    <div class="nomargin" id='competitions_joined_feed' style='width:100%'>
+
+    </div>
+
+
+
+
+
+    <script src="../static/js/profile_view.js" charset="utf-8"></script>
+
+
+
+
+  </body>
+</html>

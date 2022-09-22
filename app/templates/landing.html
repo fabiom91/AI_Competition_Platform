@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+ <html lang="en" dir="ltr">
+   <head>
+     <meta charset="utf-8">
+
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <script src="https://kit.fontawesome.com/c346c28ff4.js" crossorigin="anonymous"></script>
+     <!-- Optional JavaScript -->
+     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+     <!-- AJAX -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+     <title>landing_page</title>
+     <style media="screen">
+       html, body {
+         height: 100%;
+         width: 100%;
+         overflow: hidden;
+       }
+       .card {
+         position: absolute;
+         top: 100px;
+         margin-left: 10%;
+         margin-right: 10%;
+         width:80%;
+         padding: 10px;
+         text-align: center;
+       }
+       input {
+         max-width: 400px;
+         margin: auto;
+         text-align: center;
+         float: none;
+       }
+       button {
+         max-width: 200px;
+         margin: auto;
+         float: none;
+       }
+       .container {
+         margin: auto;
+         padding-top: 10px;
+       }
+     </style>
+   </head>
+   <body>
+
+     <div class="card">
+       <h2>XXX Research Community</h2>
+       <h3>Alpha test v.1.1.0</h3>
+       <p>This is a temporary landing page to allow internal <b>testing</b> of the platform.<br>The access at this stage is only for <strong>authorized personell</strong></p>
+       <p>If you were looking for <strong>XXX Centre website</strong>,<br>click on the link below to be redirected:</p>
+       <a href="www.XXXcentre.ie">www.XXXcentre.ie</a>
+       <div class="container">
+         <input onclick="clearContents('admin_pwd')" id="admin_pwd" type="password" name="" value="" placeholder="Admin Password"><br><br>
+         <button id='send_btn' onclick="send_password()" type="button" class="btn btn-primary" name="button">Send</button>
+       </div>
+
+     </div>
+
+     <script>
+
+       function loadPWD(){
+         var pwd = localStorage.getItem('_temp_pwd');
+         if (!pwd) return false;
+         pwd = atob(pwd);
+         return pwd;
+       }
+       const PWD = loadPWD();
+       if (PWD && PWD != false){
+         $.post('/test_pwd_verification', {'pwd':PWD}).done(function(re){
+           if (re['response'] == true) {
+             window.location.replace('/main.html');
+           }
+         });
+       }
+
+       function loadAttempt(){
+         var att = localStorage.getItem('_attempt');
+         if (!att) return 1;
+         return parseInt(att);
+       }
+       var attempt = loadAttempt()
+
+       function clearContents(id) {
+         var element = document.getElementById(id);
+         element.value = '';
+       }
+
+       function send_password(){
+         attempt += 1;
+         if (attempt < 5){
+           var pwd = document.getElementById('admin_pwd').value;
+           localStorage.setItem('_attempt',attempt);
+           $.post('/test_pwd_verification', {'pwd':pwd}).done(function(re){
+             if (re['response'] == true) {
+               var cached_pwd = btoa(pwd);
+               localStorage.setItem('_temp_pwd',cached_pwd);
+               localStorage.removeItem('_attempt');
+               window.location.replace('/main.html');
+             } else {
+               alert('Wrong Password');
+             }
+           });
+         } else {
+           alert('Maximum number of attempts reached, contact an admin to seek support.');
+         }
+       }
+
+
+     </script>
+
+   </body>
+ </html>

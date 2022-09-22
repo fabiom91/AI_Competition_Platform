@@ -1,0 +1,78 @@
+.comments_comp a {
+  border-bottom: 2px solid #fff;
+}
+.comments_comp a:hover {
+  border-bottom: 2px solid;
+}
+
+.horiz_line {
+  margin-top: 10px;
+}
+
+#article_feed {
+  position: relative;
+  padding-bottom: 20px;
+}
+#article_feed iframe {
+  width: 100%;
+}
+
+table {
+  font-family: 'Lato', sans-serif;
+}
+
+th {
+  font-size: 18px;
+  color: #7a5ea1;
+}
+
+table i {
+  color: #7a5ea1;
+}
+
+th, td {
+  padding: 20px 0;
+}
+
+th:first-child, td:first-child {
+  padding-left: 30px;
+}
+
+tr:nth-child(even) {
+  background-color: #f5ebfd;
+}
+
+
+#leaderboard {
+  display: none;
+}
+
+#comment {
+  width: 100%;
+  padding: 10px;
+}
+
+#new_comment {
+  display: none;
+}
+
+#upload_results, #upload_link {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px 20px;
+  min-width: 100px;
+  height: 50px;
+}
+
+.save_article:hover {
+  font-weight: bold;
+}
+
+
+#author_priviledges, #admin_priviledges {
+  display: none;
+}
+
+#close_competition_btn, #closed_comp_disclaimer {
+  display:none;
+}

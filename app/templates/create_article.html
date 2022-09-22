@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link href="../static/bower_components/krajee-markdown-editor/css/markdown-editor.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="../static/bower_components/krajee-markdown-editor/plugins/highlight/highlight.min.css" media="all" rel="stylesheet" type="text/css"/>
+
+
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/create_articles.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/c346c28ff4.js" crossorigin="anonymous"></script>
+    <!-- AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/purify/purify.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-deflist.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-footnote.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-abbr.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-sub.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-sup.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-ins.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-mark.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-smartarrows.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-checkbox.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-cjk-breaks.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-emoji.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/highlight/highlight.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/js/markdown-editor.js" type="text/javascript"></script>
+
+
+
+  </head>
+  <body style="overflow:hidden;">
+
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <p><strong>Invalid Input</strong> You should check in on some of those fields below.</p>
+      <ul style='list-style:circle' id='update_error_alert'>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="didascalic centered">
+      <p class="nomargin"><strong>Chose an orientation and upload your main Article Picture (Optional)</strong></p>
+    </div>
+    <div class="row centered didascalic">
+      <input type="file" name="" value="" id='upload_article_img_form' accept="image/png, image/jpeg" hidden>
+      <div class="col nomargin" onclick="upload_img('portrait')">
+        <div class="upload_icon" style='float:right;'>
+          <i class="fas fa-mobile-alt fa-3x"></i>
+          <p style="padding-top:14px;">Portrait</p>
+        </div>
+        <i id='check_portrait' style='bottom:5px;right:5px;position:absolute;color:green;display:none' class="fas fa-check-circle fa-2x"></i>
+      </div>
+      <div class="col nomargin" onclick="upload_img('landscape')">
+        <div class="upload_icon rotate180">
+          <p class="rotate180">Landscape</p>
+          <i class="fas fa-mobile-alt fa-3x rotate90"></i>
+          <i id='check_landscape' style='top:5px;left:5px;position:absolute;color:green;transform:rotate(180deg);display:none' class="fas fa-check-circle fa-2x"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row centered">
+      <div class="col">
+        <button id='remove_img_btn' onclick='remove_img()' style='color:red;border-radius:10px;display:none;'><i class='fas fa-window-close' style='margin-right:10px;margin-top:3px;'></i>Remove Image</button>
+      </div>
+    </div>
+
+
+    <!-- Markdown text Areas from: https://github.com/kartik-v/krajee-markdown-editor -->
+    <div class="article_text">
+      <textarea id='NewArticle' rows="15">
+Please, begin your article with a title like this:
+# My Article title
+
+This is a markdown editor, Type here your article body and use the tools or markdown code to style it.
+If you need help or you want to know more about markdown, click on the **light bulb** icon in the bottom left of this form.
+You can preview your article by clicking on the icons in the bottom right of this form.
+
+**Click here to begin writing**
+    </textarea>
+    </div>
+
+    <div class="didascalic centered">
+      <p class='nomargin'>Additional Resources (Optional)<br><strong>Do not upload competition resources here</strong><br>(max. 20Mb)</p>
+      <div class="row align-items-center">
+        <div class="col"></div>
+        <div class="didascalic upload_form col-md-4">
+          <input id='upload_additional_resources' type="file" name="" value="" multiple>
+          <ul id='files_list'>
+
+
+
+          </ul>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+
+    <div class="centered" id='comp_btn_div'>
+      <a href="#" id='make_comp_button'>Make Competition</a>
+    </div><br>
+    <div class="row">
+      <div class="col">
+        <button style='float:right;' type="button" class="btn btn-secondary" onclick='goto_dashboard()'>Cancel</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary" onclick="saveAnd_goto_dashboard()">Publish</button>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" style='height:100%' id="make_comp_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col disclaimer">
+              <h3>Disclaimer</h3>
+              <p>
+                In order to make a Machine Learning Competition out of your data, you must upload the required files:
+                a <i>Training dataset</i> which contains the data that your partecipant will use to train their model;
+                a <i>Validation dataset</i> which contains <strong>labelled</strong> data against which the partecipants
+                submission will be tested by our automated scoring algorithm; a <i>Data description</i> with details on each
+                feature in your data and additional resources if needed (e.g. .edf, .img etc.). It is <strong>Your duty</strong>
+                to insure that the data is correctly formatted and the description is clear and understandable. To know more, check out the FAQ section in the About page.
+              </p>
+            </div>
+
+            <div class="row">
+              <div class="col"></div>
+              <div class="col-md-6 horiz_line"></div>
+              <div class="col"></div>
+            </div>
+
+            <div class="row centered didascalic upload_comp">
+              <div class="col"></div>
+              <input type="file" name="" value="" id='input_training_data' hidden>
+              <div class="col" style='padding:15px;'>
+                <div class="container upload_form" onclick="upload_comp_data('input_training_data')">
+                  <i class="fas fa-running fa-3x"></i>
+                  <p class="nomargin"><strong>Upload</strong></p>
+                  <p class="nomargin">Training Data</p>
+                </div>
+                <div class="col uploaded_file" id='uploaded_training_data'>
+                  <i class="fas fa-window-close fa-lg secondnav_button"></i>
+                  <p>uploaded_file</p>
+                </div>
+              </div>
+              <input type="file" name="" value="" id='input_validation_data' hidden>
+              <div class="col" style='padding:15px'>
+                <div class="container upload_form" onclick="upload_comp_data('input_validation_data')">
+                  <i class="fas fa-flask fa-3x"></i>
+                  <p class="nomargin"><strong>Upload</strong></p>
+                  <p class="nomargin">Validation Data</p>
+                </div>
+                <div class="col uploaded_file" id='uploaded_validation_data'>
+                  <i class="fas fa-window-close fa-lg secondnav_button"></i>
+                  <p>uploaded_file</p>
+                </div>
+              </div>
+              <input type="file" name="" value="" id='input_description_data' hidden>
+              <div class="col" style='padding:15px'>
+                <div class="container upload_form" onclick="upload_comp_data('input_description_data')">
+                  <i class="fas fa-table fa-3x"></i>
+                  <p class="nomargin"><strong>Upload</strong></p>
+                  <p class="nomargin">Data Description</p>
+                </div>
+                <div class="col uploaded_file" id='uploaded_description_data'>
+                  <i class="fas fa-window-close fa-lg secondnav_button"></i>
+                  <p>uploaded_file</p>
+                </div>
+              </div>
+              <input type="file" name="" value="" id='input_other_data' hidden>
+              <div class="col" style='padding:15px'>
+                <div class="container upload_form" onclick="upload_comp_data('input_other_data')">
+                  <i class="fas fa-layer-group fa-3x"></i>
+                  <p class="nomargin"><strong>Upload</strong></p>
+                  <p class="nomargin">Other Resources</p>
+                </div>
+                <div class="col uploaded_file" id='uploaded_other_data'>
+                  <i class="fas fa-window-close fa-lg secondnav_button"></i>
+                  <p>uploaded_file</p>
+                </div>
+              </div>
+              <div class="col"></div>
+            </div>
+
+            <div class="col disclaimer">
+              <h3>Automated Evaluation Measures</h3>
+              <p>Select the appropriate evaluation measures for your competition.
+                Our server will use them to score users submissions automatically and
+                generate the <strong>Public Leaderboard</strong>. It is <strong>Your duty</strong>
+                to manually evaluate at least the first 10 submissions and assign them a definitive score.</p>
+                <p>The evaluation measures <strong>Weight</strong> must be a number between 0 and 1. When a submission is uploaded,
+                our algorithm multiply the corrispondent measure result from the submission by the weight of the evaluation measure
+                you choose. The Leaderboard position is calculate based on the sum of each evaluation measure score obtain by <thead>
+                partecipant with its best submission. To know more, check out the FAQ section in the About page.
+                </thead> </p>
+            </div>
+
+            <div class="row" align='center' style="margin: 20px 0 50px 0;">
+              <div class="col">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked onclick="show_measures('classification')"> Classification
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="option2" autocomplete="off" onclick="show_measures('regression')"> Regression
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row centered">
+              <div class="col"></div>
+              <div class="col-md-8" id='eva_measures'>
+                <div class="row">
+                  <div class='col'></div>
+                  <div class='col-md-4'>
+                    <p><strong>Measure</strong></p>
+                  </div>
+                  <div class="col-md-1"></div>
+                  <div class="col-md-3">
+                    <p><strong>Weight</strong></p>
+                  </div>
+                  <div class='col'></div>
+                </div>
+              </div>
+              <div class='col'></div>
+            </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="discard_competition()">Discard</button>
+            <button type="button" class="btn btn-primary" onclick="saveCompetition()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <script src="../static/js/create_article.js" charset="utf-8"></script>
+
+  </body>
+</html>

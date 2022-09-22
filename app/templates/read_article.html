@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="../static/bower_components/krajee-markdown-editor/css/markdown-editor.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="../static/bower_components/krajee-markdown-editor/plugins/highlight/highlight.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/read_article.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/create_articles.css">
+
+    <script src="https://kit.fontawesome.com/c346c28ff4.js" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+
+
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/purify/purify.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-deflist.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-footnote.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-abbr.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-sub.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-sup.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-ins.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-mark.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-smartarrows.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-checkbox.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-cjk-breaks.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/markdown-it/markdown-it-emoji.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/plugins/highlight/highlight.min.js" type="text/javascript"></script>
+    <script src="../static/bower_components/krajee-markdown-editor/js/markdown-editor.js" type="text/javascript"></script>
+  </head>
+
+  <body style="overflow:hidden;">
+
+    <div class="row centered">
+      <div class="col"></div>
+      <div class="col-md-8">
+        <div class="row comments_comp">
+          <div class="col">
+            <a href="javascript: scroll_page('comments_scroll')"><h3>Comments</h3></a>
+          </div>
+          <div class="col" id='competition_scroll_btn'>
+            <a href="javascript: scroll_page('competition_scroll')"><h3>Competition</h3></a>
+          </div>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+
+    <div class='horiz_line'></div>
+
+    <div class="container" id='priviledges'>
+      <!-- <div class='row' align='center' id='author_priviledges'>
+        <div class='col' align='right'>
+          <button id='edit_article_btn' class='admin_button' type='submit' name='button'><i class='fas fa-pencil-alt' style='margin-right:10px'></i>Edit Article</button>
+        </div>
+        <div class='col' align='left'>
+          <button id='delete_article_btn' class='admin_button' type='submit' name='button' style='color:red'><i class='fas fa-pencil-alt' style='margin-right:10px'></i>Delete Article</button>
+        </div>
+      </div> -->
+      <!-- <div class='row' align='center' id='admin_priviledges'>
+        <div class='col'>
+          <button id='approve_article_btn' class='admin_button' type='submit' name='button' style='color:green'><i class='fas fa-crown' style='margin-right:10px'></i>Approve Article</button>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="feed" id='article_feed'>
+      <iframe scrolling='no' id='article_frame'>
+        <p>Your browser does not support iframes.</p>
+      </iframe>
+    </div>
+
+    <div class="row align-items-end" style='padding:0 10%'>
+      <div class="col" id='resources_list'>
+      </div>
+      <div class="col save_article" align='right'>
+        <a href='javascript: save_article()' id='save_btn'>Add Bookmark <i class="far fa-bookmark fa-lg" id='save_icon'></i></a>
+      </div>
+    </div>
+
+    <div id='competition_div'>
+      <div class="horiz_line"></div>
+
+      <div class="row centered" id='competition_scroll'>
+        <div class="col">
+          <h3>Competition</h3>
+        </div>
+      </div>
+
+      <div class="row" align='center' style="margin: 20px 0 50px 0;">
+        <div class="col">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked onclick="show_hide_div('data_downloads')" disabled> Downloads
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option2" autocomplete="off" onclick="show_hide_div('leaderboard')"> Leaderboard
+            </label>
+          </div>
+        </div>
+      </div>
+
+
+      <div id='data_downloads' class="row centered">
+        <div class="col"></div>
+        <div class="col-md-6">
+          <form action="/download_file" method="POST" id='form_download'><input type="hidden" name="" value="" id='input_download'></form>
+          <table style='width:100%' id='data_downloads_table'>
+            <tr>
+              <th>Data</th>
+              <th>Format</th>
+              <th>Size</th>
+              <th>Dimensions</th>
+            </tr>
+            <tr>
+              <td>file1</td>
+              <td>csv</td>
+              <td>133Mb</td>
+              <td>15 Rows<br>15K columns</td>
+              <td><i class="fas fa-file-download fa-2x"></i></td>
+            </tr>
+          </table><br>
+          <a id='download_all_btn' href=""><i class="fas fa-cloud-download-alt fa-lg" style='margin-right:10px;'></i>Download all Files</a>
+        </div>
+        <div class="col"></div>
+      </div>
+
+      <div id='leaderboard' class="row centered">
+        <div class="col"></div>
+
+        <div class="col-md-8 overflow-auto" style='max-height:500px;' id='leaderboard_feed'>
+          <!-- <div class="horiz_line"></div>
+          <div class="row centered">
+            <div class="col">
+              <img class='profile_picture_leaderboard nomargin' src="../static/imgs/noAvatar.png" alt="profile_picture">
+              <p class='nomargin'>My name here</p>
+            </div>
+            <div class="col" align='center'>
+              <canvas id="radarChart"></canvas>
+            </div>
+            <div class="col">
+              <p>114 of 2232 on the <strong>Private</strong> Leaderboard</p>
+              <h3 id='medal_awarded'>Bronze Medal</p>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <button style='font-size:70%; margin-top:10px;'>Download Submission <i class="fas fa-cloud-download-alt"></i></button>
+            </div>
+          </div> -->
+
+        </div>
+        <div class="col"></div>
+      </div>
+
+      <div class="row centered">
+        <div class="col">
+          <h4 style='color:red' id='closed_comp_disclaimer'>This competition is now closed. No further submissions are allowed.</h4>
+        </div>
+      </div>
+      <div class="row centered" style='margin:50px 0;'>
+        <div class="col"></div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-primary" type="button" name="button" id='join_comp_btn'>Join the<br>Competition</button>
+            </div>
+            <div class="col">
+              <button class="btn btn-secondary" type="button" name="button" id='submit_results_btn'>Submit you<br>Results</button>
+            </div>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row centered">
+        <div class="col" id='close_comp_div'>
+          <!-- <button id='close_competition_btn' class='admin_button' type='submit' name='button'  style='color:red' onclick='close_competition()'><i class='fas fa-times' style='margin-right:10px'></i>Close Competition</button> -->
+        </div>
+      </div>
+    </div>
+
+
+    <div class="horiz_line"></div>
+    <div class="row centered" id='comments_scroll'>
+      <div class="col">
+        <h3>Comments</h3>
+      </div>
+    </div>
+
+    <div class="row centered">
+      <div class="col overflow-auto"  id='comments_feed'>
+        <div class='row'>
+          <div class='col-md-2 small-card'>
+            <!-- <img class='profile_picture_leaderboard nomargin' src='../static/imgs/noAvatar.png' alt='profile_picture'> -->
+          </div>
+          <div id='comment1' class='col overflow-hidden' style='text-align:justify;max-height:200px;' onclick='read_all("comment1")'>
+
+          </div>
+          <div class='col-md-1'>
+            <!-- <i class='fas fa-caret-up fa-3x'></i> -->
+            <!-- <h3 class='nomargin'>00</h3> -->
+            <!-- <i class='fas fa-caret-down fa-3x'></i> -->
+          </div>
+        </div>
+        <div class='horiz_line'></div>
+      </div>
+    </div>
+    <div id='new_comment' class="row centered">
+      <div class="col"></div>
+      <div class="col-md-6">
+        <div>
+          <textarea id='comment' rows="5" placeholder="Write your comment here"></textarea>
+          <button class="btn btn-secondary" type="button" name="button" onclick="showhide_newcomment()">Discard</button>
+          <button class="btn btn-primary" type="button" name="button" onclick="save_comment()">Post Comment</button>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row centered">
+      <div class="col">
+        <a id='writecomment_btn' onclick="showhide_newcomment()">+ Write Comment</a>
+      </div>
+    </div>
+
+
+
+    <div class="row footer centered">
+      <div class="col-md-2">
+        <h3>About the Author</h3>
+        <img class='profile_picture_leaderboard withborder nomargin' src="../static/imgs/noAvatar.png" alt="profile_picture" id='author_pic'>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class='col-md-8' style='text-align:justify;' id='author_name_qualifications'>
+
+          </div>
+          <div class='col-md-3 contacts my-auto' id='author_contacts'>
+
+          </div>
+          <div class="col-md-1 my-auto" id='article_votes_btns'>
+            <!-- <i class="fas fa-caret-up fa-3x" id='article_upvote_btn'></i>
+            <h3 class='nomargin' id='votes_+id+"'>00</h3>
+            <i class="fas fa-caret-down fa-3x" id='article_downvote_btn'></i> -->
+          </div>
+        </div>
+        <div class="col down_footer" style='text-align:right'>
+          <a href="#" id='download_article_btn'>Download Article<i class="fas fa-file-download fa-2x" style='margin-left:10px'></i></a>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" style='height:100%' id="submit_results_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id='modal_body'>
+            <div class="col disclaimer">
+              <h3>Disclaimer</h3>
+              <p>
+                In order to make a Machine Learning Competition submission, you must provide the followings:
+                a <i>Results Dataset</i> which contains the competition test data labelled using your model;
+                a <i>Link to your Code</i> that can be a GitHub repository, a Google Drive, Dropbox etc. and
+                should contain you <b>model, eventual resources</b> and a <b>readme</b> with the model description
+                and usage instructions.<br><br>
+                Please review the following requirements before submitting your results:
+              </p>
+                <ul style='list-style: disc; width:auto;'>
+                  <li>The submission does NOT contain null values;</li>
+                  <li>The predicted feature is named: 'class' (lowercase) regardless of the type of model you've built;</li>
+                  <li>If your submission does not follow the order of the validation set, it has to match its index;</li>
+                  <li>The evaluation measures are in their normal range</li>
+                  <li>The predicted class data-type match the class of the Training/Validation dataset.</li>
+                </ul>
+              <p>
+                Please, be sure to check out the article <strong>How to join a Competition</strong> for a detailed description
+                of the above requirements. <br><br>
+                <strong>Fail to provide the required components could results in a automatic
+                withdrawal from the competition.</strong><br><br><i>submitting your results you agree to be contacted
+                via email by the staff and/or the competition owner regarding your submission.</i><br><br>
+                <strong><span style='color:red'>Uploading Malicious software through the upload and/or the link to Your
+                code, is a criminal offence and will be persecuted.</span></strong>
+              </p>
+            </div>
+
+            <div class="row">
+              <div class="col"></div>
+              <div class="col-md-6 horiz_line"></div>
+              <div class="col"></div>
+            </div>
+
+            <div class="row centered">
+              <div class="col">
+                <h4>Labelled Test Data (Max. 50Mb)</h4>
+                <input id='upload_results' type="file" name="" value="" accept="text/csv">
+              </div>
+              <div class="col">
+                <h4>Code Link</h4>
+                <input id='upload_link' type="text" name="" value="">
+              </div>
+            </div>
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
+            <button type="button" class="btn btn-primary" onclick="saveSubmission()" id='save_changes_btn'>Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="src/purify.js"></script>
+    <script src="../static/js/read_article.js" charset="utf-8"></script>
+
+  </body>
+</html>

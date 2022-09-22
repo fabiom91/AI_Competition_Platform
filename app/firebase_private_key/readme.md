@@ -1,0 +1,1 @@
+Here needs to be stored the configuration file from Firebase (.json)

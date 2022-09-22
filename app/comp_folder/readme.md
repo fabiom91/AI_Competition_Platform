@@ -1,0 +1,1 @@
+This folder is for competition files to be temporarily stored. The content of this folder will reset evrytime the docker container is re-built.

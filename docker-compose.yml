@@ -1,0 +1,53 @@
+version: "3.3"
+services:
+  traefik:
+    container_name: traefik
+    build: ./traefik
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --providers.docker
+      - --api
+      - --certificatesresolvers.leresolver.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
+      - --certificatesresolvers.leresolver.acme.email=XXX@XXX.com
+      - --certificatesresolvers.leresolver.acme.storage=/acme.json
+      - --certificatesresolvers.leresolver.acme.tlschallenge=true
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik/acme.json:/traefik/acme.json"
+    labels:
+    # global redirect to https
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+    # middleware redirect
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+  web:
+    container_name: XXX_Research_Community
+    restart: always
+    build: ./app
+    ports:
+      - "5001:5001"
+    stdin_open: true
+    tty: true
+    environment:
+      - FLASK_APP=main.py
+      - FLASK_ENV=production
+    command: >
+      /bin/bash -c 'python -c "import sys; sys.path.insert(0,\"services\"); from myFirebase import update_container; update_container()"
+      && exec gunicorn --config gunicorn_config.py wsgi:app'
+    volumes:
+      - ./app:/main
+    labels:
+      - "traefik.http.routers.web.rule=Host(`XXX.com`)"
+      - "traefik.http.routers.web.entrypoints=websecure"
+      - "traefik.http.routers.web.tls=true"
+      - "traefik.http.routers.web.tls.certresolver=leresolver"
+      - "traefik.http.services.web.loadbalancer.server.port=5001"
+      
+
