@@ -1,6 +1,6 @@
-# What is XXX Research Community
+# What is INFANT - AI Competition Platform
 
-<p >Is a <strong>social network</strong> and a <strong>machine learning competitions platform</strong> dedicated to clinicians and researchers in the field of Paediatrics and Neonatology. XXX Research Community is been made by <a href="https://www.XXXcentre.ie/">XXX Research Centre</a> in the boader <em>Open Science</em> objective.</p>
+<p >Is a <strong>social network</strong> and a <strong>machine learning competitions platform</strong> dedicated to clinicians and researchers in the field of Paediatrics and Neonatology. INFANT - AI Competition Platform is been made by <a href="https://www.infantcentre.ie/">INFANT Research Centre</a> in the boader <em>Open Science</em> objective.</p>
 
 # Disclaimer:
 > This repository has been made out of a MVP product. We cannot guarantee its correct working as it depends on the developer to adapt the code to meet the requirement of he/her own infrastructure.
