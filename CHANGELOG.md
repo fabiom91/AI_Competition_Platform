@@ -2,10 +2,41 @@
 
 All notable changes to this repository. Versions follow [semantic versioning](https://semver.org/).
 
+## [2.0.1] — 2026-09-13
+
+Corrections to text and metadata found while reviewing the Zenodo deposit of 2.0.0. No code
+or data changed, so the leaderboard, the scoring path and the demo behave exactly as in
+2.0.0. This is the version the paper cites.
+
+### Fixed
+
+- **The demo article still published a redacted mailbox.** `app/static/demo/article.md`
+  carried `XXXresearchcommunity@gmail.com` in its "Contact Us" section, and the generated
+  `js/demo-data.js` with it, so the address appeared on the demo's article page. Both now use
+  the `support@your_support_email.com` placeholder used throughout the repository, which is
+  what `app/static/demo/README.md` already said was there.
+- **Three tracked `.DS_Store` files were still being released.** Adding `.DS_Store` to
+  `.gitignore` in 2.0.0 had no effect on files git was already tracking, so the root, `app/`
+  and `app/static/` copies were included in the 2.0.0 source archive. They are removed from
+  the index here (`git rm --cached`). They hold nothing but Finder's folder-view state.
+- Two statements in the 2.0.0 notes that did not match the release: `.gitignore` was described
+  as carrying an exception for a demo `leaderboard.json`, which does not exist — the demo
+  leaderboard is computed by `build_demo.py`, not stored — and the `.DS_Store` removal was
+  reported as complete.
+
+### Changed
+
+- **The name is "AI Competition Platform", without the "INFANT" prefix**, in `CITATION.cff`
+  and `.zenodo.json`, matching the Zenodo record. The full form is now used in both, so a
+  future release cannot push the shorter metadata title back over the record.
+- `CITATION.cff` carries the Zenodo concept DOI, `10.5281/zenodo.22734743`, which resolves to
+  the most recent archived version.
+- The README gives the DOI and points to 2.0.1 as the release to clone or cite.
+
 ## [2.0.0] — 2026-09-13
 
 The archival release: self-contained, so that a copy of this repository can be built and read
-without depending on anything fetched at build time. This is the version the paper cites.
+without depending on anything fetched at build time.
 
 A major version because an existing deployment cannot be upgraded in place without changes:
 Traefik's certificate store moved from a bind-mounted file to a directory at a different
@@ -123,7 +154,8 @@ does not build at all.
 ### Removed
 
 - Eight `.DS_Store` files, and a stale markdown draft left in `app/temp/` from 2020.
-  `.DS_Store` is now in `.gitignore`.
+  `.DS_Store` is now in `.gitignore`. Three that were already tracked survived this and
+  were removed from the index in 2.0.1.
 
 ### Notes
 
@@ -131,9 +163,9 @@ does not build at all.
   the paper apart from a removed `print(self.Cm)` debug statement. The metric is unchanged, so
   this release reproduces the published leaderboard values: the vendored copy was checked
   against Table 5 and gives the XGBoost weighted MCC of 0.311 exactly.
-- `.gitignore` excludes `*.json` and `*.csv`; exceptions were added for `.zenodo.json`, the
-  demo's `leaderboard.json` and the demo's data files. `traefik/letsencrypt/` is ignored
-  outright.
+- `.gitignore` excludes `*.json`, `*.csv` and `*.zip`; exceptions were added for
+  `.zenodo.json` and the static demo's own data and resource files. `traefik/letsencrypt/`
+  is ignored outright.
 - Two pre-existing frontend faults are also known and deliberately left unchanged:
   `app/static/js/myFirebase.js` imports its configuration with `assert { type: 'JSON' }`,
   which current Chrome no longer accepts, and `app/static/js/main.js` is a classic script
@@ -152,4 +184,4 @@ does not build at all.
 
 First tagged release: the platform as it stood at the end of the competition. It does not
 build — `requirements.txt` declared `sklearn`, which cannot be installed (see 2.0.0 above) —
-and it is superseded. Cite 2.0.0.
+and it is superseded. Cite the latest release.

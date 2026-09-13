@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite both the software release and the paper below."
-title: "INFANT AI Competition Platform"
+title: "AI Competition Platform: an open-source platform for machine-learning competitions on clinical data"
 abstract: >-
   An open-source web platform for hosting machine-learning competitions on clinical data,
   built at the INFANT Research Centre, University College Cork, and used to run a competition
@@ -8,10 +8,14 @@ abstract: >-
   encephalopathy. Includes the weighted Matthews correlation coefficient used to rank the
   leaderboards.
 type: software
-version: 2.0.0
+version: 2.0.1
 date-released: 2026-09-13
 license: BSD-3-Clause
 repository-code: "https://github.com/fabiom91/AI_Competition_Platform"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22734743
+    description: "Concept DOI: resolves to the most recent version of this software on Zenodo."
 keywords:
   - machine learning competition
   - open science

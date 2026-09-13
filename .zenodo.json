@@ -1,7 +1,7 @@
 {
   "upload_type": "software",
-  "title": "INFANT AI Competition Platform: an open-source platform for machine-learning competitions on clinical data",
-  "version": "2.0.0",
+  "title": "AI Competition Platform: an open-source platform for machine-learning competitions on clinical data",
+  "version": "2.0.1",
   "language": "eng",
   "license": "bsd-3-clause",
   "access_right": "open",

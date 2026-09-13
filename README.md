@@ -21,14 +21,17 @@ The competition dataset is published separately and is **not** in this repositor
 
 ## Version and archive
 
-The archival release is **v2.0.0**. Cite or clone that tag rather than the default branch:
+The archival release is **v2.0.1**. Cite or clone that tag rather than the default branch:
 
 ```bash
-git clone --branch v2.0.0 https://github.com/fabiom91/AI_Competition_Platform.git
+git clone --branch v2.0.1 https://github.com/fabiom91/AI_Competition_Platform.git
 ```
 
-It is deposited on Zenodo with a DOI — see `CITATION.cff` for how to cite it, and
-`CHANGELOG.md` for what changed since v1.0.0, which does not build and should not be used.
+It is archived on Zenodo under the concept DOI
+[10.5281/zenodo.22734743](https://doi.org/10.5281/zenodo.22734743), which resolves to the
+most recent version; each release also has its own version DOI, listed on the record. See
+`CITATION.cff` for how to cite it, and `CHANGELOG.md` for what changed since v1.0.0, which
+does not build and should not be used.
 
 The release is **self-contained**: the weighted MCC used to rank the leaderboards is vendored
 into the repository at
@@ -139,7 +142,7 @@ The application is meant to be deployed on a remote server, but it is containeri
 also be run on a local machine with Docker.
 
 1. Clone the repository at the tagged release:
-   `git clone --branch v2.0.0 https://github.com/fabiom91/AI_Competition_Platform.git`
+   `git clone --branch v2.0.1 https://github.com/fabiom91/AI_Competition_Platform.git`
 2. `cd AI_Competition_Platform`
 3. Optionally add the files listed under *What you have to supply* above. Skip this to start
    in the pages-only state described under *Running without Firebase*.
@@ -367,6 +370,7 @@ BSD 3-Clause. See [`LICENSE`](LICENSE).
 ## Citation
 
 If you use this platform, please cite the paper above and the software release you used —
-`CITATION.cff` gives both, and GitHub's *Cite this repository* button will format either. If
+`CITATION.cff` gives both, and GitHub's *Cite this repository* button will format either.
+The software DOI is [10.5281/zenodo.22734743](https://doi.org/10.5281/zenodo.22734743). If
 you use the competition data, please cite the Scientific Data descriptor and its Zenodo
 record.

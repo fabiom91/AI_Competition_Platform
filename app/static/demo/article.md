@@ -71,7 +71,7 @@ This competition is run by the [Irish Centre for Maternal and Child Health
 Research](https://infantcentre.ie), located at [University College
 Cork](https://www.ucc.ie/en/), Ireland.
 
-Please address all quieres to XXXresearchcommunity@gmail.com.
+Please address all quieres to support@your_support_email.com.
 
 ## Acknowledgements
 This work was supported by an Innovator Award from the Wellcome Trust (209325/Z/17/Z). The
