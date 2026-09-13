@@ -1,0 +1,36 @@
+{
+  "upload_type": "software",
+  "title": "INFANT AI Competition Platform: an open-source platform for machine-learning competitions on clinical data",
+  "version": "2.0.0",
+  "language": "eng",
+  "license": "bsd-3-clause",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Magarelli, Fabio",
+      "affiliation": "INFANT Research Centre, University College Cork, Cork, Ireland",
+      "orcid": "0000-0002-5199-395X"
+    }
+  ],
+  "description": "<p>A web platform for hosting machine-learning competitions on clinical data, built at the INFANT Research Centre, University College Cork. It was used to run a competition to grade the severity of EEG background abnormalities in newborns with hypoxic-ischaemic encephalopathy (HIE).</p><p>The platform is a Flask application served by gunicorn behind Traefik, with Firebase (Authentication, Firestore, Storage) as the backend store. Participants upload a CSV of predicted grades; the platform scores each submission on accuracy, F1, precision and recall (macro-averaged) and a weighted Matthews correlation coefficient, and ranks the leaderboard on a per-competition weighted combination of those measures. The weighted MCC implementation is included in this release at <code>app/services/MCC_Weighted</code>.</p><p>The competition dataset is not included here; it is published separately on Zenodo under the Scientific Data descriptor referenced below.</p><p>This is research software: a minimum viable product written to run one competition. It has not been hardened, audited or maintained as a production service, and the public deployment is no longer served.</p>",
+  "keywords": [
+    "machine learning competition",
+    "open science",
+    "neonatal EEG",
+    "hypoxic-ischaemic encephalopathy",
+    "electroencephalography",
+    "benchmarking",
+    "Matthews correlation coefficient",
+    "Flask",
+    "research software"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.1038/s41597-023-02002-8",
+      "relation": "references",
+      "scheme": "doi",
+      "resource_type": "dataset"
+    }
+  ],
+  "notes": "Includes the weighted MCC implementation vendored from https://github.com/fabiom91/MCC_Weighted at tag v1.0.0 (commit ed55752f5af1bf704d11b7159904fa7a55857227), BSD 3-Clause."
+}

@@ -79,7 +79,7 @@ function load_article(){
     var article_frame = document.getElementById('article_frame');
     article_frame.style.position = 'relative';
     article['main']['full_text'] = DOMPurify.sanitize(article['main']['full_text'], {ALLOW_UNKNOWN_PROTOCOLS: true});
-    var temp_frame = '<link rel="stylesheet" type="text/css" href="../static/styles/main.css"><link rel="stylesheet" type="text/css" href="../static/styles/read_article.css"><link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap" rel="stylesheet"><link rel="stylesheet" type="text/css" href="../static/styles/pandoc.css">';
+    var temp_frame = '<link rel="stylesheet" type="text/css" href="../styles/main.css"><link rel="stylesheet" type="text/css" href="../styles/read_article.css"><link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap" rel="stylesheet"><link rel="stylesheet" type="text/css" href="../styles/pandoc.css">';
     if (article['main']['img']){
       var url = article['main']['img']['url'];
       var orientation = article['main']['img']['orientation'];
@@ -118,7 +118,7 @@ function load_article(){
         var format = files[i]['format'];
         var size = files[i]['size'];
         var dimensions = files[i]['dimensions'];
-        temp_table += "<tr><td>"+name+"</td><td>"+format+"</td><td>"+size+"</td><td>"+dimensions+"</td><td><a href='/download_file/"+AID+"/"+name+"' target='_blank'><i class='fas fa-file-download fa-2x'></i></td></tr>";
+        temp_table += "<tr><td>"+name+"</td><td>"+format+"</td><td>"+size+"</td><td>"+dimensions+"</td><td><a href='resources/"+name+"' target='_blank'><i class='fas fa-file-download fa-2x'></i></td></tr>";
       }
       table.innerHTML = temp_table;
       if (article['main']['authorID'] == UID){
@@ -213,7 +213,7 @@ iframe.addEventListener('load',function(event){
   article_feed.style.overflow = 'hidden';
 
   var download_all_btn = document.getElementById('download_all_btn');
-  download_all_btn.setAttribute('href','/download_all_files/'+AID);
+  download_all_btn.setAttribute('href','resources/comp_resources.zip');
   download_all_btn.setAttribute('onclick','remove_zip_file()');
   document.getElementById('join_comp_btn').setAttribute('onclick','join_competition()');
   document.getElementById('submit_results_btn').setAttribute('onclick','submit_results()');

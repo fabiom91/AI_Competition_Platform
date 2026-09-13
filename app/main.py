@@ -51,6 +51,47 @@ app.config['DEBUG'] = False
 #     app.logger.handlers = gunicorn_logger.handlers
 #     app.logger.setLevel(gunicorn_logger.level)
 
+# ----- FIREBASE-OPTIONAL MODE -------------------------------------------------------
+# When Firebase is not configured (see services/myFirebase.py) the application still
+# starts and serves its pages, but every endpoint that reads or writes Firebase is
+# refused immediately with 503. Without this the Firestore calls would sit in their
+# @retry loops for ten seconds per request before failing.
+
+PAGE_ENDPOINTS = frozenset([
+    "route_home", "request_dashboard", "request_about", "request_create_article",
+    "route_profile", "read_article", "request_admin", "verify_email",
+])
+
+# Without Firebase the real pages cannot load anything, so the page routes are sent to the
+# static demo instead: a copy of this frontend serving one frozen competition, with the
+# Firebase and server calls replaced (see app/static/demo/README.md). Pages the demo does
+# not copy fall back to its front page.
+DEMO_ROOT = "/static/demo/"
+DEMO_PAGES = {
+    "route_home": "index.html",
+    "request_dashboard": "dashboard.html",
+    "request_about": "about.html",
+    "read_article": "read_article.html",
+}
+
+
+@app.before_request
+def serve_demo_when_unconfigured():
+    if myFirebase.FIREBASE_AVAILABLE:
+        return None
+    endpoint = request.endpoint
+    if endpoint is None or endpoint == "static":
+        return None
+    if endpoint in PAGE_ENDPOINTS:
+        return redirect(DEMO_ROOT + DEMO_PAGES.get(endpoint, "index.html"))
+    return jsonify({
+        "error": "firebase_not_configured",
+        "message": ("This deployment has no Firebase credentials. The static demo is "
+                    "served at " + DEMO_ROOT + "index.html; see the README for what to "
+                    "supply to run the platform for real."),
+    }), 503
+
+
 # ----- LOAD TEMPLATES FUNCTIONS (WEB PAGES) -----------------------------------------
 # Those functions route the client to the frontend pages stored in "templates" folder
 

@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="icon" type="image/png" href="../static/imgs/favicon.png">
+    <link rel="icon" type="image/png" href="../imgs/favicon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="../styles/main.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,28 +18,20 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- AJAX -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script> -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
 
-    <script src="../static/js/myFirebase.js" type="module" charset="utf-8"></script>
 
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
     <!-- Autocomplete search Bar -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <title>*** Research Community</title>
@@ -49,18 +41,12 @@
 
     <div class="preloader-wrapper">
       <div class="preloader">
-          <img src="static/imgs/91.gif" alt="preloader">
+          <img src="../imgs/91.gif" alt="preloader">
       </div>
     </div>
 
     <div class="row" id='bad_request_message'>
-    <!-- {% with messages = get_flashed_messages() %}
-      {% if messages %}
-          {% for message in messages %}
-          <p>{{ message }}</p>
-          {% endfor %}
-      {% endif %}
-    {% endwith %} -->
+    <!--  -->
     </div>
 
 
@@ -71,7 +57,7 @@
             <h6 style="font-size:150%">AI Competition Platform</h6>
           </div>
           <span style="justify-content: flex-end;flex-direction: row;display: flex;color: #502a70;">
-            By <img src="../static/imgs/mobile-logo.jpg" alt="logo" style="margin-left: 5px;">
+            By <img src="../imgs/mobile-logo.jpg" alt="logo" style="margin-left: 5px;">
           </span>
         </div>
         <div class="col"></div>
@@ -89,7 +75,7 @@
             </ul>
           </div>
           <div class="col">
-            <a href="#" class="nomargin" id='noAvatar' onclick=""><img src="../static/imgs/noAvatar.png" alt="noAvatar"></a>
+            <a href="#" class="nomargin" id='noAvatar' onclick=""><img src="../imgs/noAvatar.png" alt="noAvatar"></a>
           </div>
         </div>
         <div class="col" style='position:absolute;'>
@@ -193,7 +179,10 @@
       </div>
     </div>
 
-    <script src="../static/js/main.js" charset="utf-8"></script>
+        <!-- Static demo: Firebase and the server are replaced by these two files. -->
+    <script src="js/demo-shim.js" charset="utf-8"></script>
+    <script src="js/demo-data.js" charset="utf-8"></script>
+    <script src="js/main.js" charset="utf-8"></script>
 
 
 

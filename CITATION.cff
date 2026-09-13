@@ -1,0 +1,78 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software release and the paper below."
+title: "INFANT AI Competition Platform"
+abstract: >-
+  An open-source web platform for hosting machine-learning competitions on clinical data,
+  built at the INFANT Research Centre, University College Cork, and used to run a competition
+  to grade the severity of EEG background abnormalities in newborns with hypoxic-ischaemic
+  encephalopathy. Includes the weighted Matthews correlation coefficient used to rank the
+  leaderboards.
+type: software
+version: 2.0.0
+date-released: 2026-09-13
+license: BSD-3-Clause
+repository-code: "https://github.com/fabiom91/AI_Competition_Platform"
+keywords:
+  - machine learning competition
+  - open science
+  - neonatal EEG
+  - hypoxic-ischaemic encephalopathy
+  - electroencephalography
+  - Matthews correlation coefficient
+  - research software
+authors:
+  - family-names: Magarelli
+    given-names: Fabio
+    affiliation: "INFANT Research Centre, University College Cork, Cork, Ireland"
+    orcid: "https://orcid.org/0000-0002-5199-395X"
+references:
+  - type: software
+    title: "MCC_Weighted: weighted Matthews correlation coefficient"
+    version: 1.0.0
+    license: BSD-3-Clause
+    repository-code: "https://github.com/fabiom91/MCC_Weighted"
+    notes: "Vendored in this release at app/services/MCC_Weighted (commit ed55752f5af1bf704d11b7159904fa7a55857227)."
+    authors:
+      - family-names: Magarelli
+        given-names: Fabio
+        orcid: "https://orcid.org/0000-0002-5199-395X"
+  - type: data
+    title: >-
+      Neonatal EEG graded for severity of background abnormalities in
+      hypoxic-ischaemic encephalopathy
+    doi: 10.1038/s41597-023-02002-8
+    year: 2023
+    authors:
+      - family-names: O'Toole
+        given-names: John M.
+        orcid: "https://orcid.org/0000-0001-9021-1183"
+preferred-citation:
+  type: article
+  title: >-
+    Machine-learning competition to grade EEG background patterns in newborns with
+    hypoxic-ischaemic encephalopathy
+  journal: "PLOS Digital Health"
+  authors:
+    - family-names: Magarelli
+      given-names: Fabio
+      orcid: "https://orcid.org/0000-0002-5199-395X"
+    - family-names: Boylan
+      given-names: Geraldine B.
+      orcid: "https://orcid.org/0000-0003-0920-5291"
+    - family-names: Montazeri
+      given-names: Saeed
+      orcid: "https://orcid.org/0000-0002-9924-3971"
+    - family-names: O'Sullivan
+      given-names: Feargal
+    - family-names: Lightbody
+      given-names: Dominic
+      orcid: "https://orcid.org/0000-0001-7114-2055"
+    - family-names: Ashoori
+      given-names: Minoo
+      orcid: "https://orcid.org/0000-0002-8000-9544"
+    - family-names: Skoric
+      given-names: Tamara
+      orcid: "https://orcid.org/0000-0001-9325-1869"
+    - family-names: O'Toole
+      given-names: John M.
+      orcid: "https://orcid.org/0000-0001-9021-1183"

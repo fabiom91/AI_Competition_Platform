@@ -27,13 +27,51 @@ from MCC_Weighted.weighted_metrics import Weighted_metrics
 # Initialize firebase app.
 # The firebase private key is provided by firebase and contains the credentials to link the backend server
 # to the firebase environment.
-cred = credentials.Certificate("firebase_private_key/firebase-adminsdk.json")
-secrets = pd.read_csv('firebase_private_key/secrets.csv')
-firebase_admin.initialize_app(cred)
+# Firebase is initialised here, at import time. It is optional: when the credentials are
+# absent, or when DEMO_MODE is set, the module still imports and the application starts and
+# serves its pages, with every Firebase-backed feature inert. FIREBASE_AVAILABLE says which
+# state we are in; main.py refuses Firebase-backed requests with 503 when it is False.
+#
+# Environment variables:
+#   DEMO_MODE=1                 force the offline state even when credentials are present
+#   FIREBASE_STORAGE_BUCKET     bucket name, e.g. my-project.appspot.com (required for Storage)
 
-# Create references to the firebase database and to the firebase storage
-db = firestore.client()
-bucket = storage.bucket()
+FIREBASE_AVAILABLE = False
+db = None
+bucket = None
+secrets = None
+cred = None
+
+_KEY_PATH = "firebase_private_key/firebase-adminsdk.json"
+_SECRETS_PATH = "firebase_private_key/secrets.csv"
+_DEMO_MODE = os.environ.get("DEMO_MODE", "").strip().lower() in ("1", "true", "yes", "on")
+
+if _DEMO_MODE:
+    print("[platform] DEMO_MODE is set: starting without Firebase. "
+          "Pages are served; login, articles, competitions and submissions are disabled.")
+elif not os.path.exists(_KEY_PATH):
+    print("[platform] %s not found: starting without Firebase. "
+          "Pages are served; login, articles, competitions and submissions are disabled. "
+          "See the README for what to supply." % _KEY_PATH)
+else:
+    try:
+        cred = credentials.Certificate(_KEY_PATH)
+        if os.path.exists(_SECRETS_PATH):
+            secrets = pd.read_csv(_SECRETS_PATH)
+        _options = {}
+        if os.environ.get("FIREBASE_STORAGE_BUCKET"):
+            _options["storageBucket"] = os.environ["FIREBASE_STORAGE_BUCKET"]
+        firebase_admin.initialize_app(cred, _options or None)
+        db = firestore.client()
+        bucket = storage.bucket()
+        FIREBASE_AVAILABLE = True
+        print("[platform] Firebase initialised.")
+    except Exception as exc:
+        db = None
+        bucket = None
+        FIREBASE_AVAILABLE = False
+        print("[platform] Firebase initialisation failed (%s: %s): starting without it. "
+              "Pages are served; Firebase-backed features are disabled." % (type(exc).__name__, exc))
 
 # the "@retry" decorator on the following functions describe their behaviour
 # when a function call is unsuccessful by allowing the server to retry
@@ -1452,6 +1490,9 @@ def amend_archive(tuple_dict,index):
 # update_search_archive()
 
 def update_container():
+    if not FIREBASE_AVAILABLE:
+        print("[platform] Firebase not configured: skipping the search-archive rebuild.")
+        return
     df = pd.DataFrame()
     users_collection = db.collection(u'users').stream()
     articles_collection = db.collection(u'articles').stream()

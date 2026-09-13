@@ -5,24 +5,23 @@
     <title>AI Competition Platform.md</title>
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      href="../bower_components/bootstrap/dist/css/bootstrap.min.css"
       crossorigin="anonymous"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="../static/styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/main.css" />
     <link
       rel="stylesheet"
       type="text/css"
-      href="../static/styles/read_article.css"
+      href="../styles/read_article.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="../static/styles/create_articles.css"
+      href="../styles/create_articles.css"
     />
     <link
       href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900&display=swap"
@@ -43,16 +42,13 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- AJAX -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script> -->
     <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      src="../bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
     ></script>
 
@@ -64,6 +60,9 @@
         float: none;
       }
     </style>
+      <!-- Static demo: Firebase and the server are replaced by these two files. -->
+    <script src="js/demo-shim.js" charset="utf-8"></script>
+    <script src="js/demo-data.js" charset="utf-8"></script>
   </head>
   <body id="preview" style="overflow: hidden">
     <h1><a id="XXX_Research_Community"></a>AI competition platform</h1>
@@ -276,13 +275,13 @@
     <ol>
       <li>From the top navigation bar, login into your Account</li>
     </ol>
-    <p><img src="static/imgs/about_imgs/signin.png" alt="" /></p>
+    <p><img src="../imgs/about_imgs/signin.png" alt="" /></p>
     <ol start="2">
       <li>
         click on the “+” icon on the right of the search-bar in the Dashboard
       </li>
     </ol>
-    <p><img src="static/imgs/about_imgs/plus.png" alt="" /></p>
+    <p><img src="../imgs/about_imgs/plus.png" alt="" /></p>
     <p>
       <strong
         >Please be sure you have the rights of publishing your data, article and
@@ -295,7 +294,7 @@
       <strong>click or double-click</strong> on the button labelled: “Write
       Comment”:
     </p>
-    <p><img src="static/imgs/about_imgs/writecomment.png" alt="" /></p>
+    <p><img src="../imgs/about_imgs/writecomment.png" alt="" /></p>
     <h3 id="What_is_an_Article">What is an Article</h3>
     <p>
       In the scope of this web community, an article is meant to share a
@@ -336,7 +335,7 @@
         <strong>Make Competition</strong>
       </li>
     </ol>
-    <p><img src="static/imgs/about_imgs/makecomp.png" alt="" /></p>
+    <p><img src="../imgs/about_imgs/makecomp.png" alt="" /></p>
     <p>
       BEWARE: there is no identity check in the community. Competition owners
       are advised to require a form of identification before assigning prizes in
@@ -422,7 +421,7 @@ overall_score = (<span class="hljs-number">0.7</span> * <span class="hljs-number
       <strong>validation_set.csv</strong> or features you created or modified
       but <strong>you must label your results as “class”</strong> :
     </p>
-    <p><img src="static/imgs/about_imgs/example1.png" alt="" /></p>
+    <p><img src="../imgs/about_imgs/example1.png" alt="" /></p>
     <p>
       NB: In the example above, your submission is the
       <strong>predicted_class.csv</strong> file.
@@ -505,7 +504,7 @@ overall_score = (<span class="hljs-number">0.7</span> * <span class="hljs-number
     <p>
       You can delete your own comments, articles or competitions by clicking on
       the delete button that you’ll find in your contents:
-      <img src="static/imgs/about_imgs/delete_btn.png" alt="" />
+      <img src="../imgs/about_imgs/delete_btn.png" alt="" />
     </p>
     <p>
       You cannot delete a competition that has already a submission. To do so,

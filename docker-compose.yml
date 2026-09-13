@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   traefik:
     container_name: traefik
@@ -10,7 +9,7 @@ services:
       - --api
       - --certificatesresolvers.leresolver.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
       - --certificatesresolvers.leresolver.acme.email=XXX@XXX.com
-      - --certificatesresolvers.leresolver.acme.storage=/acme.json
+      - --certificatesresolvers.leresolver.acme.storage=/letsencrypt/acme.json
       - --certificatesresolvers.leresolver.acme.tlschallenge=true
     ports:
       - "80:80"
@@ -18,7 +17,10 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik/acme.json:/traefik/acme.json"
+      # A DIRECTORY, not a file: Traefik creates acme.json inside it at runtime and
+      # writes its ACME account private key there. Never commit that file — the
+      # directory is git-ignored for exactly this reason.
+      - "./traefik/letsencrypt:/letsencrypt"
     labels:
     # global redirect to https
       - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
@@ -38,16 +40,24 @@ services:
     environment:
       - FLASK_APP=main.py
       - FLASK_ENV=production
+      # Firebase is optional. With no credentials in app/firebase_private_key/ the
+      # container starts anyway and serves the site's pages; login, articles,
+      # competitions and submissions return 503. Set DEMO_MODE=1 to force that state
+      # even when credentials are present.
+      # - DEMO_MODE=1
+      # Required for Firebase Storage once credentials are supplied:
+      # - FIREBASE_STORAGE_BUCKET=my-project.appspot.com
     command: >
       /bin/bash -c 'python -c "import sys; sys.path.insert(0,\"services\"); from myFirebase import update_container; update_container()"
       && exec gunicorn --config gunicorn_config.py wsgi:app'
-    volumes:
-      - ./app:/main
+    # Competition files and submissions are written to /app/comp_folder inside the
+    # container and are therefore lost on every rebuild. For a real deployment,
+    # persist them:
+    # volumes:
+    #   - ./comp_data:/app/comp_folder
     labels:
       - "traefik.http.routers.web.rule=Host(`XXX.com`)"
       - "traefik.http.routers.web.entrypoints=websecure"
       - "traefik.http.routers.web.tls=true"
       - "traefik.http.routers.web.tls.certresolver=leresolver"
       - "traefik.http.services.web.loadbalancer.server.port=5001"
-      
-

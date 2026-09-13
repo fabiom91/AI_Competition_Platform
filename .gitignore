@@ -2,3 +2,17 @@ __pycache__
 *.json
 *.csv
 *.zip
+.DS_Store
+
+# Exceptions to the *.json rule above.
+!.zenodo.json
+
+# Traefik writes its ACME account private key here at runtime. Never commit it.
+traefik/letsencrypt/*
+!traefik/letsencrypt/.gitkeep
+
+# The static demo ships its own data files.
+!app/static/demo/data/*.csv
+!app/static/demo/data/submissions/*/*.csv
+!app/static/demo/resources/*.csv
+!app/static/demo/resources/*.zip

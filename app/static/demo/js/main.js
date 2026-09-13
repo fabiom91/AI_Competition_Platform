@@ -191,7 +191,7 @@ $(document).ready(function () {
     document.getElementById("log_reg_disclaimer").innerHTML =
       "<strong>Please do not use your work email address.</strong>";
     document.getElementById("log_browser_disclaimer").innerHTML =
-      '<h3>Supported Browsers:</h3> <ul style="display: flex;"><li style="display:inline"><img class="browser_logo" src="../static/imgs/chrome.jpg" alt="Google Chrome"></img></li><li style="display:inline"><img class="browser_logo" src="../static/imgs/safari.png" alt="Safari"></img></li><li style="display:inline"><img class="browser_logo" src="../static/imgs/firfox.jpg" alt="Mozilla Firefox"></img></li></ul>';
+      '<h3>Supported Browsers:</h3> <ul style="display: flex;"><li style="display:inline"><img class="browser_logo" src="../imgs/chrome.jpg" alt="Google Chrome"></img></li><li style="display:inline"><img class="browser_logo" src="../imgs/safari.png" alt="Safari"></img></li><li style="display:inline"><img class="browser_logo" src="../imgs/firfox.jpg" alt="Mozilla Firefox"></img></li></ul>';
     // document.getElementById('social1').innerHTML = "<i class='fab fa-google' style='margin-right:15px'></i>Register via Google";
     // document.getElementById('social2').innerHTML = "<i class='fab fa-github' style='margin-right:15px'></i>Register via GitHub";
     document.getElementById("modal_footer").innerHTML =
