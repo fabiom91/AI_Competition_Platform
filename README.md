@@ -1,91 +1,267 @@
-# What is INFANT - AI Competition Platform
+# INFANT — AI Competition Platform
 
-<p >Is a <strong>social network</strong> and a <strong>machine learning competitions platform</strong> dedicated to clinicians and researchers in the field of Paediatrics and Neonatology. INFANT - AI Competition Platform is been made by <a href="https://www.infantcentre.ie/">INFANT Research Centre</a> in the boader <em>Open Science</em> objective.</p>
+A **social network** and **machine-learning competition platform** for clinicians and
+researchers in paediatrics and neonatology, built at the
+[INFANT Research Centre](https://www.infantcentre.ie/), University College Cork, as part of
+its Open Science work.
 
-# Disclaimer:
-> This repository has been made out of a MVP product. We cannot guarantee its correct working as it depends on the developer to adapt the code to meet the requirement of he/her own infrastructure.
+The platform was used to run a competition to grade the severity of EEG background
+abnormalities in newborns with hypoxic-ischaemic encephalopathy (HIE). That competition is
+described in:
 
----
+> Magarelli F, Boylan GB, Montazeri S, O'Sullivan F, Lightbody D, Ashoori M, Skoric T,
+> O'Toole JM. *Machine-learning competition to grade EEG background patterns in newborns
+> with hypoxic-ischaemic encephalopathy.* PLOS Digital Health (under review).
 
-# Usage
-This is a web application that is meant to be deployed on a remote server. However, thanks to recent updates, this application can also be installed and run easily on a local machine thanks to `Docker`.
+The competition dataset is published separately and is **not** in this repository:
 
-## Local Install
-You can download the application by cloning this repo in your local machine:
+> O'Toole JM et al. *Neonatal EEG graded for severity of background abnormalities in
+> hypoxic-ischaemic encephalopathy.* Scientific Data 10, 129 (2023).
+> https://doi.org/10.1038/s41597-023-02002-8 — data on Zenodo, CC-BY.
 
-1. Open a new terminal window on your computer
-2. type: `cd ` (with a space) then drag and drop on the terminal window, the folder where you wanna save the repo (e.g. `cd Desktop/myfolder`)
-3. then clone this repo by typing: `git clone https://github.com/fabiom91/AI_Competition_Platform.git` and of course press enter. If you're having problem with this command, maybe you get an error that says something like `git command not found`, then you might have to install git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-4. Once you have download the repo, in the same terminal window type `cd AI_Competition_Platform` to move to the code folder.
-5. Then run `docker-compose build && docker-compose up -d`. If you get an error, you might not have `Docker` installed on your computer: https://www.docker.com/get-started .
-   > NOTE: this won't work unless you link your own database to the Platform code. Although Firebase has been used for this application, you can modify it to use any other database.
-6. Once that's done, open your browser and visit the following address: `127.0.0.0`. Congratulation! You're live!
+## Status and disclaimer
 
----
+> This repository is a minimum viable product written by a single developer to run one
+> competition. It works for that purpose, but it has not been hardened, audited or
+> maintained as a production service, and correct behaviour outside that use is not
+> guaranteed. Anyone deploying it will have to adapt the code to their own infrastructure.
+> Treat it as research software.
 
-# Web App Structure
-This is a Flask Web application running in a dockerised container. The backend also include a Firebase app and make use of Firebase Storage, Authentication and Firestore database. The frontend is designed with web stack tech such as HTML5, CSS3 and JS with the addition of Bootstrap framework, AJAX and JQuery. The app is currently deployed at: https://infantresearchcommunity.ucc.ie
+The platform ran at `infantresearchcommunity.ucc.ie` during and after the competition. That
+domain **no longer resolves**, so any link to it will fail. The code is kept here so the
+competition can be inspected and, if wanted, re-run elsewhere.
 
-## Deployment files
+## What you have to supply
 
-- ```main.ini``` : contains all uWSGI configuration code. This file gives uWSGI instruction on how long to wait for a request, how many process allow simultaneously etc. It also instruct the app to save all backend logs in ```/var/log/uwsgi/main.log```
+Several files are deliberately absent. `.gitignore` excludes `*.json` and `*.csv`, and the
+deployment configuration has been sanitised with `XXX` placeholders. The application will
+not start, or will fail on the first page that touches data, until you provide:
 
-- ```wsgi.py``` : while *main.ini* contains the uWSGI configuration code, *wsgi.py* is the initializer for uWSGI to start serving the app.
+| What | Where | Notes |
+|---|---|---|
+| Firebase service-account key | `app/firebase_private_key/firebase-adminsdk.json` | Exact filename; loaded at import time by `app/services/myFirebase.py`. |
+| `secrets.csv` | `app/firebase_private_key/secrets.csv` | Read at import time; the module raises on startup if it is missing. |
+| Firebase web configuration | `app/static/js/firebase_config.json` | Imported by `app/static/js/myFirebase.js` as a JSON module. |
+| Flask secret key | `app/main.py`, `app.secret_key` | Currently the placeholder `b'XXXXXXX'`. Replace it before any deployment. |
+| Traefik host rule and ACME e-mail | `docker-compose.yml` | Currently `XXX.com` and `XXX@XXX.com`. |
 
-## Git files
+`firebase_admin.initialize_app(cred)` is called without a `storageBucket` option, so
+`storage.bucket()` will need one supplied — either as an option there or as an explicit
+bucket name — before Firebase Storage works.
 
-- ```.gitignore``` : contains all the files that will be ignored by the git repository. This is useful to know when deleting the app or force pulling on the server. All files in listed in this folder are not backed-up anywhere.
+There is no local or file-backed database mode: **Firebase is required**, using
+Authentication, Firestore and Storage.
 
-## Backend files
+`app/services/myFirebase.py` imports `MCC_Weighted.weighted_metrics`, which lives in a
+separate repository: https://github.com/fabiom91/MCC_Weighted. It is not vendored here;
+`app/Dockerfile` clones it into `services/MCC_Weighted` while building the image, so
+`docker-compose build` picks it up automatically. Running the app outside Docker means
+putting it on the import path yourself.
 
-- ```main.py``` : is the core of the Flask app. It contains instructions on how to serve a page to the frontend and handling to all possible requests from the frontend. However all Firebase interactions are handled on a separate file that is imported by *main.py* : ```services/myFirebase.py```
+## Usage
 
-- ```services/myFirebase.py``` : contains all the functions to handle the interactions with the Firebase app: Firebase Authentication, Storage and Firestore Database.
+The application is meant to be deployed on a remote server, but it is containerised and can
+also be run on a local machine with Docker.
 
-- ```firebase_private_key/``` : this folder contain a single **.json** file generated by Firebase that identify the Firebase app and grant access to it to the Flask application where it is called.
+1. Clone the repository:
+   `git clone https://github.com/fabiom91/AI_Competition_Platform.git`
+2. `cd AI_Competition_Platform`
+3. Add the files listed under *What you have to supply* above.
+4. `docker-compose build && docker-compose up -d`
+   (If this fails, check Docker is installed: https://www.docker.com/get-started)
+5. Open `http://127.0.0.1` in a browser. Traefik serves the site on ports 80 and 443; the
+   Flask container itself listens on 5001.
 
-## Frontend files
+Without step 3 the containers will start, but registration, login, article and competition
+pages will fail.
 
-All Frontend HTML files can be found in the **templates** folder. JS, CSS and images can instead be found in the **static** folder, respectively in **js, styles** and **imgs** subfolders.
+`docker-compose.yml` also carries a Let's Encrypt resolver and an HTTP-to-HTTPS redirect.
+For a local run they are inert; for a new deployment, set the host rule and the ACME e-mail
+address.
 
-The frontend web app contains 2 elements: a upper navigation bar and a frame in which all other pages are dynamically loaded via JS and JQuery.
+## How submissions were scored
 
-This allow the main page (**main.html** and **main.js**) to be loaded at all time serving the other pages as a frame. The main page is in charge of user login and registration and continuously check wether the user authentication status has changed.
+Participants uploaded a CSV of predicted grades for the unlabelled test epochs. For each
+submission the platform computed a set of metrics and displayed them on the leaderboard. For
+a multi-class competition these are accuracy, F1, precision and recall (all macro-averaged)
+and a column labelled *MCC*; for a binary one, AUC is added and the averaging is dropped.
+All displayed values are rounded to two decimals. The regression path reports MAE, MSE, RMSE
+and R².
 
-- **Dashboard** : Display all the articles and competitions approved, sorted by date as cards containing the article/competition preview. It uses **pandoc** to convert markdown articles into html.
+In the multi-class case the *MCC* column is not the ordinary Matthews correlation
+coefficient but a **weighted MCC**, which multiplies the confusion matrix **C** elementwise
+(Hadamard product) by a weight matrix **W** and then applies the standard multi-class MCC
+formula to the result:
 
-- **Create_article** : Contain a markdown editor ( see *bower_components* in <i><u>Other files</u></i> section of this document ) that allow the user to write a markdown article even without any markdown previous knowledge. It also contains a for to upload eventual attachments and a popup to make a competition, triggered by the **Make Competition** button.
+```
+        predicted
+         1  2  3  4
+    1 [  1  1  2  3 ]
+t   2 [  1  1  1  2 ]
+r   3 [  2  1  1  1 ]
+u   4 [  3  2  1  1 ]
+e
+```
 
-- **About** : Contain all the FAQs regarding the usage of the platform. Also an extensive description of some of the most important FAQs can be found in specific articles.
+W is 1 on the diagonal **and** on the adjacent off-diagonals, 2 for an error of two grades
+and 3 for an error of three. Errors of one grade are therefore left at face value and are
+penalised exactly as an unweighted MCC would penalise them; only larger errors are amplified.
+A consequence worth knowing: when no prediction is off by more than one grade, the weighted
+MCC equals the unweighted MCC exactly.
 
-- **Profile_view** : Is the profile page which is dynamically populated with the public info of a user when open. It also serves as the landing page after a user registration to complete the mandatory fields (First and Last Name) before being able to interact with the platform as logged user.
+The implementation is in
+[`MCC_Weighted/weighted_metrics.py`](https://github.com/fabiom91/MCC_Weighted). Note that
+`Weighted_metrics._weighted_cm()` prints the confusion matrix on every call, so do not call
+it inside a resampling loop.
 
-- **Read_article** : It display the article selected for reading. It calls specific functions on the backend to retrieve the markdown article and translate it into html (using *pandoc*). From this page, if the article host a competition, the user can also **Join a competition** and **Submit its results**.
+Ranking is separate from display. Each competition stores a `weighted_evas` dictionary — a
+weight per evaluation measure, chosen when the competition is created — and a submission's
+leaderboard score is the weighted sum of its metrics (error measures entering with a
+negative sign), scaled by 1000. A user's best submission determines their position. For the
+HIE competition the ranking followed the weighted MCC; participants were not told which of
+the displayed metrics determined their rank.
 
-- **Admin** : Provide a simple interface for admin and moderators to see all articles written (including pending articles) and all users registered. Clicking on a user or article, open the same and the admin/moderator will be able to use its privileges to:
+Two implementation details that matter if you re-run anything:
 
-  - approve an article
-  - delete an article (unless competition with 1 or more submissions)
-  - edit an article
-  - edit or cancel a comment to an article
-  - ban users
-  - unban users
-  - make a user, moderator.
+- **Submissions are aligned by row order, not by ID.** `calculate_sub_scores()` concatenates
+  the submission's prediction column with the private validation set's `class` column
+  positionally, so a submission sorted differently from the validation file will be scored
+  against the wrong rows.
+- **There is a limit of five submissions per user per day.**
 
-  Full Admin tools are available from the **Firebase Console**
+The scoring entry points are `calculate_sub_scores()` and `submit_comp_results()` in
+`app/services/myFirebase.py`. The live leaderboard rounded to two decimals; the values
+published in the paper were recomputed offline at three decimals.
 
-## Other files
-As you may have noticed from the repo, there are other files that we haven't discussed yet. Those are:
+### Reproducing a leaderboard score
 
-- ```search_archive/archive.csv``` : Is a csv file that is populated every time a new article or user is created or modified and when the server starts. It holds some basic info regarding users, articles and competitions to be feed to the search_bar available in the dashbord (in the frontend).
-- ```static/bower_components/...``` : Those files are needed to serve a markdown editor and interpreter from third-party: https://github.com/kartik-v/krajee-markdown-editor
-- ```temp/...``` : Is a temporary folder used to store local files on the server prior to be uploaded to the Firebase storage. In this way, the user does not have to wait until the final upload to Firebase is complete because this happen in the background. Also the file is delete from the folder as soon as the upload to Firebase is successful.
+You do not need the platform to check a score. With the public dataset from Zenodo and a
+submission file:
 
-In addition to the above, you may have noticed the folder: ```comp_folder``` on the server app. This folder contains all the files relative to the competitions when they are created.
+```python
+import pandas as pd
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from MCC_Weighted.weighted_metrics import Weighted_metrics
 
-If you want to delete a competition, first delete the article the host it from the database and from the Firebase Storage (Use the Firebase Console). Then you can safely remove the correspondent competition folder.
+truth = pd.read_csv("validation_set_private.csv")     # columns: class, file_ID, ID
+sub   = pd.read_csv("my_submission.csv")              # columns: ID, preds
 
-# Server logs
-The main server log (the uWSGI one) that contains all backend activity on the server is stored here: ```/var/log/uwsgi/main.log```. This file also contains all the errors that happen on the backend so it is one of the primary instruments for debug.
+df = truth.merge(sub, on="ID")
+y_true = df["class"].round().astype(int).tolist()
+y_pred = df["preds"].round().astype(int).tolist()
+if 0 in y_pred:                       # some submissions used 0-based grades
+    y_pred = [p + 1 for p in y_pred]
 
-The Logs are also redirect to the container main log and available by running ```docker logs --follow <CONTAINER-NAME OR ID>```
+print("Accuracy ", accuracy_score(y_true, y_pred))
+print("F1       ", f1_score(y_true, y_pred, average="macro"))
+print("Precision", precision_score(y_true, y_pred, average="macro"))
+print("Recall   ", recall_score(y_true, y_pred, average="macro"))
+print("wMCC     ", Weighted_metrics(y_true, y_pred).weighted_matthews_corcoef())
+```
+
+All four grades must be present in the data, otherwise the 4×4 weight matrix is not
+conformable with the confusion matrix and the multiplication fails.
+
+## Web app structure
+
+A Flask application in a Docker container, served by gunicorn behind Traefik, with Firebase
+(Authentication, Firestore, Storage) as the backend store. The frontend is HTML5, CSS3 and
+JavaScript with Bootstrap/MDBootstrap, AJAX and jQuery.
+
+### Deployment files
+
+- `docker-compose.yml` — the two services, `traefik` and `web`, TLS and routing labels. The
+  `web` service runs `update_container()` from `myFirebase.py` and then
+  `gunicorn --config gunicorn_config.py wsgi:app`.
+- `app/gunicorn_config.py` — bind address, 4 workers × 4 threads, 120 s timeout, log level
+  `critical`.
+- `app/Dockerfile` — python:3.10.4-bullseye, installs pandoc and `requirements.txt`, clones
+  `MCC_Weighted`.
+- `traefik/Dockerfile` — Traefik 2.6 with an `acme.json` created at build time.
+- `app/wsgi.py` — the WSGI entry point; turns off `DEBUG`.
+- `main.ini` — uWSGI configuration (processes, `harakiri` timeout, socket, and a log path of
+  `/var/log/uwsgi/main.log`). This is from the earlier, non-containerised deployment behind
+  nginx and uWSGI. The Docker setup does not use it; it is kept for anyone deploying that
+  way.
+- `.gitignore` — excludes `__pycache__`, `*.json`, `*.csv` and `*.zip`. Worth reading before
+  a force-pull on a server: nothing listed there is backed up.
+
+### Backend files
+
+- `app/main.py` — the core of the Flask app: routing, page serving and request handling. All
+  Firebase interaction is delegated to `app/services/myFirebase.py`.
+- `app/services/myFirebase.py` — every Firebase interaction (Authentication, Storage,
+  Firestore), submission scoring and leaderboard recalculation.
+- `app/firebase_private_key/` — the service-account key and `secrets.csv`. **Not committed**;
+  supply your own.
+
+### Frontend files
+
+Templates are in `app/templates/` (`main`, `dashboard`, `create_article`, `read_article`,
+`profile_view`, `admin`, `about`, `landing`, `verify_email`); JavaScript, CSS and images in
+`app/static/` (`js`, `styles`, `imgs`).
+
+The frontend is a single-page application with two elements: a top navigation bar and a
+frame into which the other pages are loaded dynamically with JavaScript and jQuery. The main
+page (`main.html`, `main.js`) stays loaded, serves the other pages into the frame, handles
+login and registration, and watches for changes in authentication state. E-mail verification
+and an MFA validation step have their own routes.
+
+- **Dashboard** — all approved articles and competitions, newest first, as preview cards.
+  Uses pandoc to render markdown articles as HTML.
+- **Create_article** — a markdown editor (see *Other files*) that lets a user write an
+  article without knowing markdown, an attachment uploader, and the **Make Competition**
+  dialogue.
+- **About** — FAQs on using the platform.
+- **Profile_view** — a user's public profile, and the landing page after registration where
+  the mandatory first and last name are completed.
+- **Read_article** — renders the selected article. Where the article hosts a competition,
+  this is also where a user joins it and submits results.
+- **Admin** — lists all articles (including pending) and all registered users. From here an
+  admin or moderator can approve an article, delete one (unless it is a competition with at
+  least one submission), edit an article, edit or remove a comment, ban and unban users, and
+  promote a user to moderator. Full administration is done from the Firebase Console.
+
+### Other files
+
+- `app/search_archive/archive.csv` — rebuilt whenever an article or user is created or
+  modified and when the server starts. Holds basic information about users, articles and
+  competitions to feed the dashboard search bar. Not committed (`*.csv` is ignored).
+- `app/static/bower_components/…` — third-party markdown editor and interpreter:
+  https://github.com/kartik-v/krajee-markdown-editor
+- `app/temp/…` — staging area for files on their way to Firebase Storage, so the user does
+  not wait for the upload; each file is removed once the upload succeeds.
+- `app/comp_folder/` — per-competition files and every user submission. In the container this
+  is reset on every rebuild; on a server deployment it persists. Files here are **not**
+  deleted automatically when a competition is deleted and may still be referenced from the
+  database, so check before removing anything. To delete a competition, remove the article
+  hosting it from Firestore and Firebase Storage first, then delete the competition folder.
+
+## Logs
+
+With the Docker setup, gunicorn runs at log level `critical` and its output goes to the
+container log: `docker logs --follow <container name or id>`. On the older uWSGI deployment,
+backend activity and errors were written to `/var/log/uwsgi/main.log`, with nginx logs in
+`/var/log/nginx/`.
+
+## Known limitations
+
+Recorded so that anyone re-running the platform knows what to expect.
+
+- **`MCC_Weighted` is cloned at build time from its default branch, unpinned.** Two builds at
+  different dates can embed different versions of the scoring metric. Pinning a tag or commit
+  would make the leaderboard reproducible from the image alone.
+- **Submissions are matched to the ground truth by row order**, not by identifier (see
+  *How submissions were scored*).
+- **Firebase is required**; there is no local database mode.
+- **No automated tests.** The repository history is the only version reference.
+- **MVP scope**, and the deployment is offline and no longer maintained.
+
+## Licence
+
+BSD 3-Clause. See [`LICENSE`](LICENSE).
+
+## Citation
+
+If you use this platform, please cite the paper above. If you use the competition data,
+please cite the Scientific Data descriptor and the Zenodo record.
